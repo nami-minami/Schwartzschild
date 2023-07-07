@@ -1,0 +1,113 @@
+\documentclass{jsarticle}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+\title{Schwartzschild 解のRicci テンソル}
+\author{}
+
+\begin{document}
+    \maketitle
+
+%\begin{equation}
+%    \tensor{g}{_{\mu\nu}} = 
+%    \left\{ \
+%        \begin{aligned}
+%            &\tensor{g}{_{00}} = -e^{\nu(r)}\\
+%            &\tensor{g}{_{11}} = r^2\\
+%            &\tensor{g}{_{22}} = r^2\sin\theta\\
+%            &\tensor{g}{_{33}} = e^{\lambda(r)}
+%        \end{aligned}
+%    \right.
+%    , \quad
+%    \tensor{g}{^{\mu\nu}}
+%    \left\{ \
+%        \begin{aligned}
+%            &\tensor{g}{^{00}} = -e^{-\nu(r)}\\
+%            &\tensor{g}{^{11}} = r^{-2}\\
+%            &\tensor{g}{^{22}} = (r^2\sin\theta)^{-1}\\
+%            &\tensor{g}{^{33}} = e^{-\lambda(r)}
+%        \end{aligned}
+%    \right.
+%\end{equation}
+
+\begin{equation}
+   \tensor{\varGamma}{^\rho_{\mu\nu}} = 
+    \left\{  \
+        \begin{aligned}
+            &\tensor{\varGamma}{^0_{03}} = \tensor{\varGamma}{^0_{30}} = \frac{1}{2} \nu'\\
+            &\tensor{\varGamma}{^1_{13}} = \tensor{\varGamma}{^1_{31}} = r^{-1}\\
+            &\tensor{\varGamma}{^2_{12}} = \tensor{\varGamma}{^1_{21}} = \cot\theta\\
+            &\tensor{\varGamma}{^2_{23}} = \tensor{\varGamma}{^2_{32}} = r^{-1}\\
+            &\tensor{\varGamma}{^3_{00}} = -\frac{1}{2} \nu'e^{-\lambda + \nu}\\ 
+            &\tensor{\varGamma}{^3_{11}} = -re^{-\lambda}\\
+            &\tensor{\varGamma}{^3_{22}} = -re^{-\lambda}\sin^2\theta\\
+            &\tensor{\varGamma}{^3_{33}} = \frac{1}{2} \lambda'
+        \end{aligned}
+    \right. 
+\end{equation}
+
+%Swartzschild の座標系における計量および Christoffel 記号は以上の通りである．ここで，Ricci テンソル
+%を計算する．
+
+\begin{equation}
+    \tensor{R}{_{\mu\nu}} = \partial_\rho \tensor{\varGamma}{^\rho_{\mu\nu}} 
+                            - \partial_\nu \tensor{\varGamma}{^\rho_{\mu\rho}}
+                            + \tensor{\varGamma}{^\sigma_{\mu\nu}} \tensor{\varGamma}{^\rho_{\rho\sigma}}
+                            - \tensor{\varGamma}{^\tau_{\mu\rho}} \tensor{\varGamma}{^\rho_{\nu\tau}}
+\end{equation}
+
+\begin{align}
+    \tensor{R}{_{33}} &= \underbrace{\partial_\rho \tensor{\varGamma}{^\rho_{33}}}_{\rho=3} 
+                            - \underbrace{\partial_3 \tensor{\varGamma}{^\rho_{3\rho}}}_{\rho=0,1,2,3}
+                            + \underbrace{\tensor{\varGamma}{^\sigma_{33}} \tensor{\varGamma}{^\rho_{\rho\sigma}}}_{\sigma=3,\rho=0,1,2,3}
+                            - \underbrace{\tensor{\varGamma}{^\tau_{3\rho}} \tensor{\varGamma}{^\rho_{3\tau}}}_{\tau=\rho=0,1,2,3}\\\nonumber
+    \\
+    &= \begin{multlined}[t]
+            \partial_3 \tensor{\varGamma}{^3_{33}}
+            - \partial_3 \tensor{\varGamma}{^0_{30}} 
+            - \partial_3 \tensor{\varGamma}{^1_{31}}
+            - \partial_3 \tensor{\varGamma}{^2_{32}}
+            - \partial_3 \tensor{\varGamma}{^3_{33}}\\
+            + \tensor{\varGamma}{^3_{33}} \tensor{\varGamma}{^0_{03}}
+            + \tensor{\varGamma}{^3_{33}} \tensor{\varGamma}{^1_{13}}
+            + \tensor{\varGamma}{^3_{33}} \tensor{\varGamma}{^2_{23}}
+            + \tensor{\varGamma}{^3_{33}} \tensor{\varGamma}{^3_{33}}\\
+            - \tensor{\varGamma}{^0_{30}} \tensor{\varGamma}{^0_{30}}            
+            - \tensor{\varGamma}{^1_{31}} \tensor{\varGamma}{^1_{31}}
+            - \tensor{\varGamma}{^2_{32}} \tensor{\varGamma}{^2_{32}}
+            - \tensor{\varGamma}{^3_{33}} \tensor{\varGamma}{^3_{33}}
+        \end{multlined}\\\nonumber
+        \\
+    &= \begin{multlined}[t]
+            - \partial_3 \tensor{\varGamma}{^0_{30}} 
+            - \partial_3 \tensor{\varGamma}{^1_{31}}
+            - \partial_3 \tensor{\varGamma}{^2_{32}}\\
+            + \tensor{\varGamma}{^3_{33}} \tensor{\varGamma}{^0_{03}}
+            + \tensor{\varGamma}{^3_{33}} \tensor{\varGamma}{^1_{13}}
+            + \tensor{\varGamma}{^3_{33}} \tensor{\varGamma}{^2_{23}}\\
+            - (\tensor{\varGamma}{^0_{30}})^2            
+            - (\tensor{\varGamma}{^1_{31}})^2
+            - (\tensor{\varGamma}{^2_{32}})^2 
+        \end{multlined}\\\nonumber
+        \\
+    &= \begin{multlined}[t]
+            - \frac{1}{2}\nu'' + r^{-1} + r^{-1}\\ 
+            + \frac{1}{2}\lambda'\frac{1}{2}\nu' + \frac{1}{2}\lambda'r^{-1} + \frac{1}{2}\lambda'r^{-1}
+            + \frac{1}{4}{\lambda'}^2\\
+            - \frac{1}{4}{\nu'}^2 - r^{-2} - r^{-2} - \frac{1}{4}{\lambda'}^2
+        \end{multlined}\\\nonumber
+        \\
+    &= \begin{multlined}[t]
+            - \frac{1}{2}\nu''-\frac{1}{4}{\nu'}^2+\frac{1}{4}{\lambda'\nu'}+\frac{\lambda'}{r}
+        \end{multlined}
+\end{align}
+
+
+
+
+
+
+
+
+\end{document}
